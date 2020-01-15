@@ -69,7 +69,7 @@ T CacheManager<T>::get(string key) {
     if (map.find(key) == map.end()) {
         //^can't find the key in the cache, try on the disk
         std::fstream in_file;
-        in_file.open(key + class_name, std::ios::in | std::ios::binary);
+        in_file.open(key, std::ios::in | std::ios::binary);
         if (!in_file) {
             throw ("error in opening file to read");
         }
