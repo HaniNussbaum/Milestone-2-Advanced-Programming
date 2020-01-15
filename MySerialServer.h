@@ -6,7 +6,13 @@
 #define MILESTONE_2_ADVANCED_PROGRAMMING_MYSERIALSERVER_H
 
 
-class MySerialServer {
+#include "abstractServer.h"
+
+class MySerialServer : abstractServer{
+private:
+    int port;
+    clientHandler handler;
+public:
 
 };
 
