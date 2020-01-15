@@ -4,10 +4,9 @@
 
 #ifndef MILESTONE_2_ADVANCED_PROGRAMMING__SOLVER_H_
 #define MILESTONE_2_ADVANCED_PROGRAMMING__SOLVER_H_
-template <typename  P>
-template <typename  S>
+template <typename  S, typename P>
 
-class Solver<P,S> {
+class Solver {
   virtual S solve(P problem) = 0;
 };
 
