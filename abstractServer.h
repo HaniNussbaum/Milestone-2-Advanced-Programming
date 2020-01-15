@@ -9,6 +9,7 @@ class abstractServer{
 public:
     virtual void open(int num,clientHandler handler)=0;
     virtual void stop()=0;
+    virtual void accept(clientHandler handler)=0;
 private:
 };
 

@@ -12,8 +12,11 @@ class MySerialServer : abstractServer{
 private:
     int port;
     clientHandler handler;
+    int socket_num;
 public:
-
+    void open(int port, clientHandler handler);
+    void close();
+    void accept(clientHandler handler);
 };
 
 
