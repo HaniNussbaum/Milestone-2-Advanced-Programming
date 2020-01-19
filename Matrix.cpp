@@ -41,26 +41,6 @@ list<pair<int, int>> Matrix::getAllPossibleStates(pair<int, int> state) {
   if (isPointValid(temp) && !isBlocked(temp)) {
     states.push_back(temp);
   }
-  //up left
-  temp = make_pair(state.first - 1, state.second - 1);
-  if (isPointValid(temp) && !isBlocked(temp)) {
-    states.push_back(temp);
-  }
-  //up right
-  temp = make_pair(state.first - 1, state.second + 1);
-  if (isPointValid(temp) && !isBlocked(temp)) {
-    states.push_back(temp);
-  }
-  //down left
-  temp = make_pair(state.first + 1, state.second - 1);
-  if (isPointValid(temp) && !isBlocked(temp)) {
-    states.push_back(temp);
-  }
-  //down right
-  temp = make_pair(state.first + 1, state.second + 1);
-  if (isPointValid(temp) && !isBlocked(temp)) {
-    states.push_back(temp);
-  }
   return states;
 }
 void Matrix::setPoint(pair<int, int> point, int value) {

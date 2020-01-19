@@ -1,0 +1,12 @@
+//
+// Created by noa on 19/01/2020.
+//
+
+#ifndef MILESTONE_2_ADVANCED_PROGRAMMING__ASTAR_H_
+#define MILESTONE_2_ADVANCED_PROGRAMMING__ASTAR_H_
+
+class Astar {
+
+};
+
+#endif //MILESTONE_2_ADVANCED_PROGRAMMING__ASTAR_H_
