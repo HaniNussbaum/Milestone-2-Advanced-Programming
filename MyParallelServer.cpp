@@ -1,17 +1,15 @@
 //
-// Created by hani on 15/01/2020.
+// Created by hani on 16/01/2020.
 //
 
-
-
+#include "MyParallelServer.h"
 #include <sys/socket.h>
 #include <iostream>
 #include <netinet/in.h>
-#include "MySerialServer.h"
 #include <thread>
 #include <unistd.h>
 
-void MySerialServer::open(int a_port, ClientHandler a_handler) {
+void MyParallelServer::open(int port, ClientHandler handler) {
     this->port = port;
     this->handler = handler;
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -36,21 +34,4 @@ void MySerialServer::open(int a_port, ClientHandler a_handler) {
         std::cerr << "Error during listening" << std::endl;
         exit(-3);
     }
-    int client_socket = accept(socket_num, (struct sockaddr *) &address, (socklen_t *) &address);
-    handler.handleClient(client_socket);
-    std::thread acceptThread;
-    acceptThread = std::thread(&MySerialServer::acceptClients, this);
-    MySerialServer::closeServer();
-
-}
-
-void MySerialServer::acceptClients(ClientHandler handler) {
-    while (true) {
-        int client_socket = accept(socket_num, (struct sockaddr *) &address_num, (socklen_t *) &address_num);
-        handler.handleClient(client_socket);
-    }
-}
-
-void MySerialServer::closeServer() {
-    close(socket_num);
 }

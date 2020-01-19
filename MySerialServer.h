@@ -8,15 +8,17 @@
 
 #include "abstractServer.h"
 
+
 class MySerialServer : abstractServer{
 private:
     int port;
     ClientHandler handler;
     int socket_num;
+    sockaddr_in address_num;
 public:
     void open(int port, ClientHandler handler);
-    void close();
-    void accept(ClientHandler handler);
+    void closeServer();
+    void acceptClients(ClientHandler handler);
 };
 
 
