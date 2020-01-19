@@ -16,7 +16,7 @@ void MyTestClientHandler::handleClient(int socket) {
       solution = this->cache_manager->get(buffer_str);
       //if no solution is found solve the problem
     } catch (char const *e) {
-      solution = this->solver.solve(buffer);
+      solution = this->solver->solve(buffer);
     }
     int is_sent = send(socket, &solution, solution.size(), 0);
     if (is_sent == -1) {

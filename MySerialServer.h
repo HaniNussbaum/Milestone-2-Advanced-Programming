@@ -7,18 +7,27 @@
 
 
 #include "abstractServer.h"
+#include <sys/socket.h>
+#include <iostream>
+#include <netinet/in.h>
+#include <thread>
+#include <unistd.h>
 
-
-class MySerialServer : abstractServer{
+class MySerialServer : public abstractServer {
 private:
     int port;
-    ClientHandler handler;
+    ClientHandler *handler;
     int socket_num;
     sockaddr_in address_num;
 public:
-    void open(int port, ClientHandler handler);
+    void open(int port, ClientHandler *handler);
+
     void closeServer();
-    void acceptClients(ClientHandler handler);
+
+    void acceptClients(ClientHandler *handler);
+
+    MySerialServer(int port,ClientHandler *handler);
+    ~MySerialServer();
 };
 
 
