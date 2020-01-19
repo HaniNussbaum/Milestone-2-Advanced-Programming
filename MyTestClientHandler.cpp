@@ -11,6 +11,10 @@ int MyTestClientHandler::handleClient(int socket) {
 
     string line, solution;
     while (line.compare("end") != 0) {
+//        if (errno==EAGAIN||errno==EWOULDBLOCK){
+//
+//            break;
+//        }
         char buffer[1024] = {0};
         char message[1024]={0};
 
@@ -38,7 +42,7 @@ int MyTestClientHandler::handleClient(int socket) {
         }
         int is_sent = send(socket, &message, strlen(message), 0);
         if (is_sent == -1) {
-            cout<<"time out"<<endl;
+//            cout<<"time out"<<endl;
             close(socket);
             return -10;
         }
