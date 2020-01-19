@@ -8,9 +8,9 @@
 #include "ClientHandler.h"
 class abstractServer{
 public:
-    virtual void open(int num,ClientHandler *handler)=0;
+    virtual void open(int num)=0;
     virtual void closeServer()=0;
-    virtual void acceptClients(ClientHandler *handler)=0;
+    virtual void acceptClients(int clientSocket)=0;
 private:
 };
 

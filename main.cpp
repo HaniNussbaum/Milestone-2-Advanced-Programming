@@ -8,10 +8,7 @@
 #include <string>
 
 int main(){
-    StringReverser *s;
-
     Solver<string,string> *mySolver = new StringReverser();
-
-    MySerialServer * myServer = new MySerialServer(5600,new MyTestClientHandler(s));
-    myServer->open(5600, new MyTestClientHandler(s));
+    MySerialServer * myServer = new MySerialServer(5600,new MyTestClientHandler(mySolver));
+    myServer->open(5600);
 }
