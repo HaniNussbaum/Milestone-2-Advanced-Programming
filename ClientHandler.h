@@ -6,8 +6,7 @@
 #define MILESTONE_2_ADVANCED_PROGRAMMING__CLIENTHANDLER_H_
 
 class ClientHandler {
-public:
-    virtual void handleClient(int socket) = 0;
+ public:
+  virtual void handleClient(int socket) = 0;
 };
-
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__CLIENTHANDLER_H_
