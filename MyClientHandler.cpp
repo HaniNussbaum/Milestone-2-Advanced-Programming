@@ -4,7 +4,7 @@
 
 #include "MyClientHandler.h"
 
-void MyClientHandler::handleClient(int socket) {
+int MyClientHandler::handleClient(int socket) {
   char buffer[1024] = {0};
   //vector<double> double_Vector;
   int valread = read(socket, buffer, 1024);

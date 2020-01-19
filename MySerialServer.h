@@ -20,11 +20,11 @@ private:
     int socket_num;
     sockaddr_in address_num;
 public:
-    void open(int port, ClientHandler *handler);
+    void open(int port);
 
     void closeServer();
 
-    void acceptClients(ClientHandler *handler);
+    void acceptClients(int clientSocket);
 
     MySerialServer(int port,ClientHandler *handler);
     ~MySerialServer();
