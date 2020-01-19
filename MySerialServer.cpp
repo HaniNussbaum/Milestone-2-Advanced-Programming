@@ -11,13 +11,13 @@
 #include <thread>
 #include <unistd.h>
 
-void MySerialServer::open(int a_port, ClientHandler a_handler) {
+void MySerialServer::open(int a_port, ClientHandler *a_handler) {
     this->port = port;
     this->handler = handler;
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     struct timeval tv;
-    tv.tv_sec = 120;
-    setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
+//    tv.tv_sec = 120;
+//    setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
     this->socket_num = socketfd;
     if (socketfd == -1) {
         std::cerr << "Could not create a socket" << std::endl;
@@ -37,20 +37,27 @@ void MySerialServer::open(int a_port, ClientHandler a_handler) {
         exit(-3);
     }
     int client_socket = accept(socket_num, (struct sockaddr *) &address, (socklen_t *) &address);
-    handler.handleClient(client_socket);
+    handler->handleClient(client_socket);
     std::thread acceptThread;
-    acceptThread = std::thread(&MySerialServer::acceptClients, this);
+    MySerialServer *server = new MySerialServer(this->port,this->handler);
+    acceptThread = std::thread(&MySerialServer::acceptClients,server,handler);
     MySerialServer::closeServer();
 
 }
 
-void MySerialServer::acceptClients(ClientHandler handler) {
+void MySerialServer::acceptClients(ClientHandler *a_handler) {
     while (true) {
         int client_socket = accept(socket_num, (struct sockaddr *) &address_num, (socklen_t *) &address_num);
-        handler.handleClient(client_socket);
+        a_handler->handleClient(client_socket);
     }
 }
 
 void MySerialServer::closeServer() {
     close(socket_num);
 }
+
+MySerialServer::MySerialServer(int a_port, ClientHandler *a_handler) {
+    this->port = a_port;
+    this->handler = a_handler;
+}
+

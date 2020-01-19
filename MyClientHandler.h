@@ -18,10 +18,10 @@
 using namespace std;
 
 class MyClientHandler : public ClientHandler {
-  Solver<, string> solver;
+  Solver<string, string>* solver;
   CacheManager<string>* cache_manager;
   void handleClient(int socket);
-  MyClientHandler(Solver<string, string> s) {
+  MyClientHandler(Solver<string, string> *s) {
     this->solver = s;
     this->cache_manager = new CacheManager<string>(MAX_CACHE);
   }
