@@ -54,3 +54,15 @@ void Matrix::addBlockedPoint(pair<int, int> point) {
 bool Matrix::isBlocked(pair<int, int> point) {
   return (this->blocked.find(point) != this->blocked.end());
 }
+
+int Matrix::getSize() {
+  return this->size;
+}
+
+pair<int,int> Matrix::getGoal() {
+  return this->destination;
+}
+
+int Matrix::getValueOfPoint(pair<int, int> point) {
+  return this->mat[point.first][point.second];
+}

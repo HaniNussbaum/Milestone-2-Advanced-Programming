@@ -29,6 +29,9 @@ class Matrix : public Searchable<pair<int,int>> {
   pair<int,int> getInitialState();
   bool isGoalState(pair<int,int> state);
   list<pair<int,int>> getAllPossibleStates(pair<int,int> state);
+  int getSize();
+  pair<int,int> getGoal();
+  int getValueOfPoint(pair<int,int> point);
 };
 
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__MATRIX_H_
