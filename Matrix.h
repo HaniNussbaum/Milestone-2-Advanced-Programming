@@ -6,12 +6,15 @@
 #define MILESTONE_2_ADVANCED_PROGRAMMING__MATRIX_H_
 #include "Searchable.h"
 #include <unordered_set>
+#include "PairHash.h"
+
+using namespace std;
 
 class Matrix : public Searchable<pair<int,int>> {
   pair<int,int> source, destination;
   int size;
   int** mat;
-  unordered_set<pair<int,int>> blocked;
+  unordered_set<pair<int,int>,pair_hash> blocked;
  public:
   Matrix(pair<int,int> src, pair<int,int> dst, int n) {
     this->source = src;
@@ -32,6 +35,14 @@ class Matrix : public Searchable<pair<int,int>> {
   int getSize();
   pair<int,int> getGoal();
   int getValueOfPoint(pair<int,int> point);
+  //only for testing
+  void setMat(int arr[][10]) {
+    for (int i = 0; i < 10; i++) {
+      for (int j = 0; j < 10; j++) {
+        this->mat[i][j] = arr[i][j];
+      }
+    }
+  }
 };
 
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__MATRIX_H_
