@@ -20,12 +20,7 @@ typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 class DFS {
 public:
-    DFS(Matrix *a_matrix){
-        this->matrix=a_matrix;
-        this->initialState = a_matrix->getInitialState();
-        this->goalState = a_matrix->getGoal();
-    }
-    std::string search();
+    std::string search(Matrix *a_matrix);
     std::string backtrace(point);
     std::list<point> successors(point a_point) {
         std::list<point> successors;

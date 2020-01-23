@@ -4,12 +4,18 @@
 
 #include "DFS.h"
 
-std::string DFS::search() {
+std::string DFS::search(Matrix *a_matrix) {
+    this->matrix=a_matrix;
+    this->initialState = a_matrix->getInitialState();
+    this->goalState = a_matrix->getGoal();
     pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
     open.push_front(initialStatePoint);
     while (!open.empty()){
         pathAndPoint s = open.front();
         open.pop_front();
+        if (s.first.first == goalState.first && s.first.second == goalState.second) {
+            return backtrace(s.first);
+        }
         int pointFirst = s.first.first;
         int pointSecond = s.first.second;
         auto closedFind = std::find_if(closed.begin(), closed.end(),
@@ -40,7 +46,7 @@ std::string DFS::search() {
         }
 
     }
-    return backtrace(goalState);
+//    return backtrace(goalState);
 }
 
 std::string DFS::backtrace(point a_point) {

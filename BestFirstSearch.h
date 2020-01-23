@@ -18,17 +18,10 @@ typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 class BestFirstSearch {
 public:
-    std::string search();
-    BestFirstSearch(Matrix *a_matrix) {
-        this->matrix = a_matrix;
-        this->initialState = a_matrix->getInitialState();
-        this->goalState = a_matrix->getGoal();
-        pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
-        this->open.insert(initialStatePoint);
-    }
+    std::string search(Matrix *a_matrix);
 
-    ~BestFirstSearch();
     std::string backtrace(point);
+
     std::list<point> successors(point a_point) {
         std::list<point> successors;
         std::list<point> neighbors = matrix->getAllPossibleStates(a_point);
@@ -45,11 +38,12 @@ public:
 
 
 private:
-    struct compare{
-        bool operator()(const pathAndPoint first_point, const pathAndPoint second_point)const  {
-            return first_point.second.first<second_point.second.first;
+    struct compare {
+        bool operator()(const pathAndPoint first_point, const pathAndPoint second_point) const {
+            return first_point.second.first < second_point.second.first;
         }
     };
+
     unordered_map<pair<int, int>, pair<int, int>, pair_hash> parent_map;
     std::multiset<pathAndPoint, compare> open;
     std::multiset<pathAndPoint> closed;

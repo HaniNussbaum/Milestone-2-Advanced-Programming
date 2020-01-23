@@ -5,14 +5,19 @@
 #include <iostream>
 #include "BFS.h"
 
-std::string BFS::search() {
+std::string BFS::search(Matrix *a_matrix) {
+    this->matrix=a_matrix;
+    this->initialState = a_matrix->getInitialState();
+    this->goalState = a_matrix->getGoal();
     pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
     this->open.push_back(initialStatePoint);
     this->closed.insert(initialStatePoint);
     while (!open.empty()) {
         pathAndPoint s = open.front();
         open.pop_front();
-
+        if (s.first.first == goalState.first && s.first.second == goalState.second) {
+            return backtrace(s.first);
+        }
         std::list<point> neighbors = successors(s.first);
 
         for (point p : neighbors) {
@@ -21,7 +26,8 @@ std::string BFS::search() {
             int pointSecond = p.second;
 
             pathAndPoint p_path_and_point = make_pair(p,
-                                                      make_pair(s.second.first + matrix->getValueOfPoint(p), s.first));
+                                                      make_pair(s.second.first + matrix->getValueOfPoint(p),
+                                                                s.first));
             auto closedFind = std::find_if(closed.begin(), closed.end(),
                                            [pointFirst, pointSecond](const pathAndPoint &pap) {
                                                return (pap.first.first == pointFirst &&
@@ -35,7 +41,7 @@ std::string BFS::search() {
 
         }
     }
-    return backtrace(this->goalState);
+//    return backtrace(this->goalState);
 }
 
 std::string BFS::backtrace(point a_point) {

@@ -4,7 +4,7 @@
 
 #ifndef MILESTONE_2_ADVANCED_PROGRAMMING__SOLVER_H_
 #define MILESTONE_2_ADVANCED_PROGRAMMING__SOLVER_H_
-template <typename  S, typename P>
+template <typename  P, typename S>
 
 class Solver {
 public:

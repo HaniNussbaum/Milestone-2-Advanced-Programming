@@ -19,14 +19,10 @@ typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 class BFS {
 public:
-    std::string search();
-    BFS(Matrix *a_matrix) {
-        this->matrix=a_matrix;
-        this->initialState = a_matrix->getInitialState();
-        this->goalState = a_matrix->getGoal();
+    std::string search(Matrix *a_matrix);
 
-    }
     std::string backtrace(point);
+
     std::list<point> successors(point a_point) {
         std::list<point> successors;
         std::list<point> neighbors = matrix->getAllPossibleStates(a_point);

@@ -8,6 +8,7 @@
 #include "Matrix.h"
 #include "BestFirstSearch.h"
 #include "DFS.h"
+#include "BFS.h"
 
 int main() {
 
@@ -27,8 +28,8 @@ int main() {
     Matrix *my_Matrix = new Matrix(make_pair(0, 0), make_pair(9, 9), 10);
     my_Matrix->setMat(a_matrix);
 //    BestFirstSearch *bfs = new BestFirstSearch(my_Matrix);
-DFS *bfs = new DFS(my_Matrix);
-cout<<bfs->search()<<endl;
+BestFirstSearch *bfs = new BestFirstSearch();
+cout<<bfs->search(my_Matrix)<<endl;
 
 //    Solver<string, string> *mySolver = new StringReverser();
 //    MySerialServer *myServer = new MySerialServer(5600, new MyTestClientHandler(mySolver));

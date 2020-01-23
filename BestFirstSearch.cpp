@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <iostream>
 
-std::string BestFirstSearch::search() {
+std::string BestFirstSearch::search(Matrix *a_matrix) {
     struct MyClassComp {
         explicit MyClassComp(point a_point) {
             point_to_find = a_point;
@@ -17,6 +17,11 @@ std::string BestFirstSearch::search() {
     private:
         point point_to_find;
     };
+    this->matrix = a_matrix;
+    this->initialState = a_matrix->getInitialState();
+    this->goalState = a_matrix->getGoal();
+    pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
+    this->open.insert(initialStatePoint);
     while (!open.empty()) {
         pathAndPoint n = make_pair(open.begin()->first, open.begin()->second);
         closed.insert(n);
@@ -24,7 +29,6 @@ std::string BestFirstSearch::search() {
         int checl_second = n.first.second;
         open.erase(open.begin());
         if (n.first.first == goalState.first && n.first.second == goalState.second) {
-            cout<< backtrace(n.first)<<endl;
             return backtrace(n.first);
         } else {
             list<point> neighbours = successors(n.first);
