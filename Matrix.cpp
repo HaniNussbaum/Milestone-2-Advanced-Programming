@@ -66,3 +66,11 @@ pair<int,int> Matrix::getGoal() {
 int Matrix::getValueOfPoint(pair<int, int> point) {
   return this->mat[point.first][point.second];
 }
+
+void Matrix::setHashNum(size_t hn) {
+  this->hash_num = hn;
+}
+
+string Matrix::toString() {
+  return to_string(this->hash_num);
+}
