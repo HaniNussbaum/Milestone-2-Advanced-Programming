@@ -34,6 +34,9 @@ class Astar : public Searcher<string> {
   int h_distance(pair<int,int> point);
   string reconstructPath(pair<int,int> point);
  public:
+    string getClassName(){
+        return "Astar";
+    }
   string search(Matrix* matrix);
 };
 

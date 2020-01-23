@@ -17,8 +17,12 @@
 typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
-class BestFirstSearch : public Searcher<string>{
+class BestFirstSearch : public Searcher<string> {
 public:
+    std::string getClassName() {
+        return "BestFirstSearch";
+    }
+
     std::string search(Matrix *a_matrix);
 
     std::string backtrace(point);

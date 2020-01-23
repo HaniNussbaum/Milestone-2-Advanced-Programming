@@ -21,6 +21,9 @@ typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 class DFS : public Searcher<string> {
 public:
+    std::string getClassName(){
+        return "DFS";
+    }
     std::string search(Matrix *a_matrix);
     std::string backtrace(point);
     std::list<point> successors(point a_point) {
