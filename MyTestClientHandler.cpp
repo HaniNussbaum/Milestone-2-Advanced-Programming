@@ -11,10 +11,6 @@ int MyTestClientHandler::handleClient(int socket) {
 
     string line, solution;
     while (line.compare("end") != 0) {
-//        if (errno==EAGAIN||errno==EWOULDBLOCK){
-//
-//            break;
-//        }
         char buffer[1024] = {0};
         char message[1024]={0};
 
