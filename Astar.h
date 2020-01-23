@@ -15,9 +15,17 @@ using namespace std;
 
 class Astar {
   struct cell_det {
-    cell_det() : g(INT_MAX), f(INT_MAX), h(INT_MAX), visited(false) {}
+    cell_det() : g(INT_MAX), f(INT_MAX), h(INT_MAX), visited(false), closed(false) {}
     int g, h, f;
     bool visited;
+    bool closed;
+  };
+  typedef pair<pair<int,int>,cell_det*> cell;
+  class Compare {
+   public:
+    bool operator() (cell c1, cell c2) {
+      return c1.second->f > c2.second->f;
+    }
   };
   unordered_map<pair<int,int>, pair<int,int>, pair_hash> parent_map;
   pair<int,int> goal;
