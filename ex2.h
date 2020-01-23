@@ -57,8 +57,8 @@ void CacheManager<T>::insert(string key, T obj) {
     }
     //write to a file.
     //INSERT CODE OF WRITING TO A FILE HERE
-    std::fstream out_file(key + class_name, std::ios::out | std::ios::binary);
-    out_file.write((char *) &obj, sizeof(obj));
+    std::fstream out_file(key, std::ios::out);
+    out_file<<obj<<endl;
     out_file.close();
     keys.push_front(key);
     map[key] = make_pair(obj, keys.begin());
