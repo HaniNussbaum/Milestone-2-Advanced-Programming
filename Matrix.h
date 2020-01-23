@@ -36,9 +36,9 @@ class Matrix : public Searchable<pair<int,int>> {
   pair<int,int> getGoal();
   int getValueOfPoint(pair<int,int> point);
   //only for testing
-  void setMat(int arr[][10]) {
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 10; j++) {
+  void setMat(int arr[][3]) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
         this->mat[i][j] = arr[i][j];
       }
     }
