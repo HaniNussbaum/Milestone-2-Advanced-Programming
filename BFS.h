@@ -12,12 +12,13 @@
 #include <unordered_map>
 #include <algorithm>
 #include <queue>
+#include "Searcher.h"
 
 typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 
-class BFS {
+class BFS : public Searcher<string> {
 public:
     std::string search(Matrix *a_matrix);
 

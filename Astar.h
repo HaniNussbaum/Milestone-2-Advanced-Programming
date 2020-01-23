@@ -10,10 +10,11 @@
 #include <unordered_map>
 #include "Matrix.h"
 #include "PairHash.h"
+#include "Searcher.h"
 
 using namespace std;
 
-class Astar {
+class Astar : public Searcher<string> {
   struct cell_det {
     cell_det() : g(INT_MAX), f(INT_MAX), h(INT_MAX), visited(false), closed(false) {}
     int g, h, f;

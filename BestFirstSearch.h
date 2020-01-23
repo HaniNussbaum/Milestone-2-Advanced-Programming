@@ -12,11 +12,12 @@
 #include <set>
 #include <unordered_map>
 #include <algorithm>
+#include "Searcher.h"
 
 typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
-class BestFirstSearch {
+class BestFirstSearch : public Searcher<string>{
 public:
     std::string search(Matrix *a_matrix);
 
