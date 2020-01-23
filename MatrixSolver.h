@@ -23,7 +23,7 @@ public:
         this->searcher = a_searcher;
     }
 
-
+    string getSearcherClassName();
 };
 
 

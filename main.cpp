@@ -7,6 +7,7 @@
 #include "StringReverser.h"
 #include "Matrix.h"
 #include "Astar.h"
+#include "Searcher.h"
 
 int main() {
 
@@ -21,9 +22,9 @@ int main() {
                             3, 1, 2, 12, 5, 3, 0, 0, 0, 6,
                             3, 1, 2, -1, 5, 4, 3, 23, 0, 0};
 
-    Matrix *my_Matrix = new Matrix(make_pair(0, 0), make_pair(9, 9), 10);
+    Searcher<pair<int,int>> *my_Matrix = new Matrix(make_pair(0, 0), make_pair(9, 9), 10);
     my_Matrix->setMat(a_matrix);
-    Searcher* searcher;
+    Searcher<string>* searcher;
     string solution = seracher->search(my_Matrix);
     CacheManager<string>* cache_manager = new CacheManager<string>(1000);
     cache_manager->insert(my_Matrix->toString() + "_" +  searcher->getClassName(), solution);

@@ -9,6 +9,7 @@
 template <typename T>
 class Searcher {
   virtual T search(Searchable<T> s) = 0;
+  virtual string getClassName() = 0;
 };
 
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__SEARCHER_H_

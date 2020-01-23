@@ -14,7 +14,8 @@
 #include "ClientHandler.h"
 #include "ex2.h"
 #include "Solver.h"
-
+#include <cstring>
+#include <functional>
 #define MAX_CACHE 100
 
 using namespace std;
@@ -22,9 +23,12 @@ using namespace std;
 class MyClientHandler : public ClientHandler {
     Solver<string, string> *solver;
     CacheManager<string> *cache_manager;
-
+ public:
     int handleClient(int socket);
-
+    MyClientHandler* clone() {
+      MyClientHandler* clone = new MyClientHandler(this->solver);
+      return clone;
+    }
     MyClientHandler(Solver<string, string> *s) {
         this->solver = s;
         this->cache_manager = new CacheManager<string>(MAX_CACHE);

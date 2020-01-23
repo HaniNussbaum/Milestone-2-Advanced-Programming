@@ -5,26 +5,34 @@
 #include "MyClientHandler.h"
 
 int MyClientHandler::handleClient(int socket) {
-  char buffer[1024] = {0};
-  //vector<double> double_Vector;
-  int valread = read(socket, buffer, 1024);
-  string buffer_str(buffer);
-  stringstream str_stream(buffer_str);
-  string line;
-  getline(str_stream, line, '\n');
+  string line, solution, problem_buffer = "";
+  char message[1024] = {0};
 
+  while (true) {
+    char buffer[1024] = {0};
+    int valread = read(socket, buffer, 1024);
+    string buffer_string(buffer);
+    problem_buffer += buffer_string;
+    if (buffer_string.find("end\n") == string::npos) {
+      break;
+    }
+    buffer_string.clear();
+  }
 
+  string problem = problem_buffer.substr(0, problem_buffer.length() - 4);
+  hash<string> str_hash;
+  string prob_hash = to_string(str_hash(problem));
+  prob_hash += "_";
+  prob_hash += this->solver->getSearcherClassName();
 
-  //if solution is in cache send it back
-  string solution;
   try {
-    solution = this->cache_manager->get(buffer_str);
-  //if no solution is found solve the problem
-  } catch(char const* e) {
-    solution = this->solver->solve(buffer);
+    solution = this->cache_manager->get(problem);
+    //if no solution is found solve the problem_buffer
+  } catch (char const *e) {
+    solution = this->solver->solve(problem);
+    solution = solution+"\r\n";
+    strcpy(message, solution.c_str());
   }
-  int is_sent = send(socket, &solution, solution.size(), 0);
-  if (is_sent == -1) {
-    cout<<"can't send solution (handleClient)"<<endl;
-  }
+
+  close(socket);
 }

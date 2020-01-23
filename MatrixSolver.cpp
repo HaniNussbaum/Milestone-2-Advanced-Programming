@@ -4,5 +4,9 @@
 #include "MatrixSolver.h"
 
 std::string MatrixSolver::solve(std::string problem) {
-    return searcher.search(problem);
+    return this->searcher.search(problem);
+}
+
+string MatrixSolver::getSearcherClassName() {
+  return this->searcher->getClassName();
 }

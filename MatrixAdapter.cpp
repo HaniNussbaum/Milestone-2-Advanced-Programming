@@ -20,6 +20,8 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
   auto src = this->getPoint(lines.back());
   lines.pop_back();
   Matrix* matrix = new Matrix(src, dst, lines.size());
+  hash<string> str_hash;
+  matrix->setHashNum(str_hash(mat_str));
   //filling the matrix
   int j = 0, k = 0;
   for (string row : lines) {
