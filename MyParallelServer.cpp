@@ -44,8 +44,8 @@ void MyParallelServer::acceptClients(int clientSocket) {
         if (client_socket == -1) {
             break;
         }
-        ClientHandler *currClientHandler = clone(this->handler);
-        std::thread clientThread(&ClientHandler::handleClient, &currClientHandler, &client_socket);
+//        ClientHandler *currClientHandler = clone(this->handler);
+        std::thread clientThread(&ClientHandler::handleClient,handler, client_socket);
         clientThread.detach();
     }
 }
