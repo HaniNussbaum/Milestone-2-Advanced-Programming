@@ -1,33 +1,31 @@
 //
-// Created by hani on 21/01/2020.
+// Created by hani on 23/01/2020.
 //
 
-#ifndef MILESTONE_2_ADVANCED_PROGRAMMING_BESTFIRSTSEARCH_H
-#define MILESTONE_2_ADVANCED_PROGRAMMING_BESTFIRSTSEARCH_H
+#ifndef MILESTONE_2_ADVANCED_PROGRAMMING_DFS_H
+#define MILESTONE_2_ADVANCED_PROGRAMMING_DFS_H
 
-#include <string>
-#include "Matrix.h"
-#include <queue>
-#include "ComparePointByWeight.h"
+#include <utility>
+#include <map>
 #include <set>
+#include "Matrix.h"
 #include <unordered_map>
 #include <algorithm>
+#include <queue>
+#include <deque>
 
 typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
-class BestFirstSearch {
+
+class DFS {
 public:
-    std::string search();
-    BestFirstSearch(Matrix *a_matrix) {
-        this->matrix = a_matrix;
+    DFS(Matrix *a_matrix){
+        this->matrix=a_matrix;
         this->initialState = a_matrix->getInitialState();
         this->goalState = a_matrix->getGoal();
-        pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
-        this->open.insert(initialStatePoint);
     }
-
-    ~BestFirstSearch();
+    std::string search();
     std::string backtrace(point);
     std::list<point> successors(point a_point) {
         std::list<point> successors;
@@ -43,21 +41,14 @@ public:
         return successors;
     }
 
-
 private:
-    struct compare{
-        bool operator()(const pathAndPoint first_point, const pathAndPoint second_point)const  {
-            return first_point.second.first<second_point.second.first;
-        }
-    };
+    Matrix *matrix;
     unordered_map<pair<int, int>, pair<int, int>, pair_hash> parent_map;
-    std::multiset<pathAndPoint, compare> open;
+    std::deque<pathAndPoint> open;
     std::multiset<pathAndPoint> closed;
     point initialState;
     point goalState;
-    Matrix *matrix;
-
-
 };
 
-#endif //MILESTONE_2_ADVANCED_PROGRAMMING_BESTFIRSTSEARCH_H
+
+#endif //MILESTONE_2_ADVANCED_PROGRAMMING_DFS_H

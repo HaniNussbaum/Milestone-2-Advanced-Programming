@@ -7,6 +7,7 @@
 #include "StringReverser.h"
 #include "Matrix.h"
 #include "BestFirstSearch.h"
+#include "DFS.h"
 
 int main() {
 
@@ -25,8 +26,9 @@ int main() {
 //                       0,20,0};
     Matrix *my_Matrix = new Matrix(make_pair(0, 0), make_pair(9, 9), 10);
     my_Matrix->setMat(a_matrix);
-    BestFirstSearch *bfs = new BestFirstSearch(my_Matrix);
-    bfs->search();
+//    BestFirstSearch *bfs = new BestFirstSearch(my_Matrix);
+DFS *bfs = new DFS(my_Matrix);
+cout<<bfs->search()<<endl;
 
 //    Solver<string, string> *mySolver = new StringReverser();
 //    MySerialServer *myServer = new MySerialServer(5600, new MyTestClientHandler(mySolver));
