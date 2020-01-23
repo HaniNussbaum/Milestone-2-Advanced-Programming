@@ -9,16 +9,19 @@
 #include "Matrix.h"
 #include "Searchable.h"
 #include "MatrixAdapter.h"
+#include "Searcher.h"
 
-class MatrixSolver : public Solver<std::string,std::string>{
+class MatrixSolver : public Solver<std::string, std::string> {
 private:
     Matrix *matrix;
     MatrixAdapter *adapter;
-    Searcher searcher;
+    Searcher<std::string> *searcher;
 public:
-    std::string solve(std::string problem) {
-    }
+    std::string solve(std::string problem);
 
+    void setSearcher(Searcher<std::string> *a_searcher) {
+        this->searcher = a_searcher;
+    }
 
 
 };
