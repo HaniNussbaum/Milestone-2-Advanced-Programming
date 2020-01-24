@@ -12,7 +12,6 @@ int MyClientHandler::handleClient(int socket) {
     char buffer[1024] = {0};
     int valread = read(socket, buffer, 1024);
     string buffer_string(buffer);
-    cout<<buffer_string<<endl;
     problem_buffer +=   buffer_string;
     if (buffer_string.find("end") != string::npos) {
       break;
@@ -20,7 +19,6 @@ int MyClientHandler::handleClient(int socket) {
     buffer_string.clear();
     i++;
   }
-  //cout<<to_string(i)<<endl;
 
   string problem = problem_buffer.substr(0, problem_buffer.find('e'));
   this->solver->setProblem(problem);
