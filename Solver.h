@@ -14,6 +14,7 @@ public:
   virtual std::string getSearcherClassName() = 0;
   virtual void setSearcher(Searcher<std::string,pair<int,int>> *a_searcher)=0;
   virtual void setProblem(P problem) = 0;
+  virtual Solver<P,S> *clone()=0;
 };
 
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__SOLVER_H_

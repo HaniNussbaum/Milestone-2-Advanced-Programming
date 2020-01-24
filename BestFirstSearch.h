@@ -23,7 +23,10 @@ public:
     std::string getClassName() {
         return "BestFirstSearch";
     }
-
+    BestFirstSearch* clone(){
+        BestFirstSearch *cloned = new BestFirstSearch();
+        return cloned;
+    }
     std::string search(Searchable<pair<int,int>> *s);
 
     std::string backtrace(point);

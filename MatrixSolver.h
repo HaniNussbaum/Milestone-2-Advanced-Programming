@@ -16,6 +16,14 @@ private:
     MatrixAdapter *adapter;
     Searcher<std::string,pair<int,int>> *searcher;
 public:
+
+    MatrixSolver* clone(){
+        MatrixSolver* cloned = new MatrixSolver();
+        cloned->setSearcher(this->searcher->clone());
+        return cloned;
+
+    }
+
     MatrixSolver() {
       this->adapter = new MatrixAdapter();
     }

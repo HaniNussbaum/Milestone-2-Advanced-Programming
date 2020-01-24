@@ -26,7 +26,7 @@ class MyClientHandler : public ClientHandler {
  public:
     int handleClient(int socket);
     MyClientHandler* clone() {
-      MyClientHandler* clone = new MyClientHandler(this->solver);
+      MyClientHandler* clone = new MyClientHandler(this->solver->clone());
       return clone;
     }
     MyClientHandler(Solver<string, string> *s) {

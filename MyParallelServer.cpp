@@ -48,7 +48,6 @@ void MyParallelServer::acceptClients(int clientSocket) {
 //need to close the client handler
         std::thread clientThread(&ClientHandler::handleClient,currClientHandler, client_socket);
         clientThread.detach();
-        client_socket=0;
     }
 }
 
