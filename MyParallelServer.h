@@ -8,7 +8,7 @@
 #include <netinet/in.h>
 #include "abstractServer.h"
 
-class MyParallelServer : abstractServer{
+class MyParallelServer : public abstractServer{
 private:
     int port;
     ClientHandler *handler;

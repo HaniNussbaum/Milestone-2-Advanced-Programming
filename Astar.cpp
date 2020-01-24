@@ -78,13 +78,13 @@ string Astar::reconstructPath(pair<int,int> point) {
   pair<int,int> parent = this->parent_map[point];
   string cost = to_string(this->score_mat[point.first][point.second].g);
   if (parent.first > point.first) {
-    point_str = "Up(" + cost + "),";
+    point_str = "Up(" + cost + "), ";
   } else if (parent.first < point.first) {
-    point_str = "Down(" + cost + "),";
+    point_str = "Down(" + cost + "), ";
   } else if (parent.second > point.second) {
-    point_str = "Left(" + cost + "),";
+    point_str = "Left(" + cost + "), ";
   } else {
-    point_str = "Right(" + cost + "),";
+    point_str = "Right(" + cost + "), ";
   }
 
   if (point == this->start) {
