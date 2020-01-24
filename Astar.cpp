@@ -5,7 +5,7 @@
 #include "Astar.h"
 
 
-string Astar::search(Matrix* matrix) {
+string Astar::search(Searchable<pair<int,int>>* matrix) {
   stack<cell> stack;
   this->goal = matrix->getGoal();
   this->start = matrix->getInitialState();
@@ -74,11 +74,23 @@ int Astar::h_distance(pair<int, int> point) {
 }
 
 string Astar::reconstructPath(pair<int,int> point) {
-  string point_str = to_string(point.first) + "," + to_string(point.second) + " ; ";
+  string point_str;
+  pair<int,int> parent = this->parent_map[point];
+  if (parent.first > point.first) {
+    point_str = "Up, ";
+  } else if (parent.first < point.first) {
+    point_str = "Down, ";
+  } else if (parent.second > point.second) {
+    point_str = "Left, ";
+  } else {
+    point_str = "Right, ";
+  }
+
   if (point == this->start) {
-    return point_str;
+    return "";
   }
   else {
     return reconstructPath(this->parent_map[point]) + point_str;
   }
 }
+

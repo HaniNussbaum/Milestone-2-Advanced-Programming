@@ -10,6 +10,7 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
   string line;
   //breaking string into lines
   while (getline(str_stream, line, '\n')) {
+    line = line.substr(0, line.length() - 1);
     lines.push_back(line);
     line.clear();
   }
@@ -25,13 +26,18 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
   //filling the matrix
   int j = 0, k = 0;
   for (string row : lines) {
-    regex pattern("[0-9]+");
+    regex pattern("[0-9-]+");
     auto words_begin = sregex_iterator(row.begin(), row.end(), pattern);
     auto words_end = sregex_iterator();
     for (sregex_iterator i = words_begin; i != words_end; ++i) {
+      k = 0;
       smatch match = *i;
       int value = stoi(match.str());
-      matrix->setPoint(make_pair(j, k), value);
+      if (value == -1) {
+        matrix->addBlockedPoint(make_pair(j, k));
+      } else {
+        matrix->setPoint(make_pair(j, k), value);
+      }
       k++;
     }
     j++;
@@ -40,7 +46,7 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
 }
 
 pair<int,int> MatrixAdapter::getPoint(string point) {
-  regex pattern("[0-9]+");
+  regex pattern("[0-9-]+");
   auto words_begin = sregex_iterator(point.begin(), point.end(), pattern);
   auto words_end = sregex_iterator();
   sregex_iterator i = words_begin;

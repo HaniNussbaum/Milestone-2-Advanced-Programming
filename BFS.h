@@ -18,9 +18,9 @@ typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 
-class BFS : public Searcher<string> {
+class BFS : public Searcher<string,pair<int,int>> {
 public:
-    std::string search(Matrix *a_matrix);
+    std::string search(Searchable<pair<int,int>> *a_matrix);
     std::string getClassName(){
         return "BFS";
     }
@@ -42,7 +42,7 @@ public:
 
 
 private:
-    Matrix *matrix;
+    Searchable<pair<int,int>> *matrix;
     unordered_map<pair<int, int>, pair<int, int>, pair_hash> parent_map;
     std::list<pathAndPoint> open;
     std::multiset<pathAndPoint> closed;

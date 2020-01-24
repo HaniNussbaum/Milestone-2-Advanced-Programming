@@ -6,9 +6,10 @@
 #define MILESTONE_2_ADVANCED_PROGRAMMING__SEARCHER_H_
 #include "Searchable.h"
 
-template <typename T>
+template <typename T, typename P>
 class Searcher {
-  virtual T search(Searchable<T> s) = 0;
+ public:
+  virtual T search(Searchable<P>* s) = 0;
   virtual string getClassName() = 0;
 };
 

@@ -37,9 +37,9 @@ public:
 
 template<typename T>
 void CacheManager<T>::insert(string key, T obj) {
-    if (keys.size() == 0) {
-        class_name = obj.class_name;
-    }
+//    if (keys.size() == 0) {
+//        class_name = obj.class_name;
+//    }
 
     //the key is not in the cache->write into the filesystem and into the cache
     if (map.find(key) == map.end()) {
@@ -71,7 +71,7 @@ T CacheManager<T>::get(string key) {
         std::fstream in_file;
         in_file.open(key, std::ios::in | std::ios::binary);
         if (!in_file) {
-            throw ("error in opening file to read");
+            throw "error in opening file to read";
         }
         //got the object from the harddisk, now insert it
         T obj;

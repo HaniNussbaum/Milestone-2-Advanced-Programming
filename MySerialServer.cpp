@@ -48,7 +48,7 @@ void MySerialServer::open(int a_port) {
 void MySerialServer::acceptClients(int clientSocket) {
     while (listen(clientSocket,200)!=-1) {
         struct timeval tv;
-        tv.tv_sec = 5;
+        tv.tv_sec = 120;
         setsockopt(clientSocket, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
         int client_socket = accept(clientSocket, (struct sockaddr *) &this->address_num, (socklen_t *) &this->address_num);
         if (client_socket==-1){

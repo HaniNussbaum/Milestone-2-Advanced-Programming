@@ -3,15 +3,19 @@
 //
 
 #include "MySerialServer.h"
-#include "MyTestClientHandler.h"
 #include "StringReverser.h"
 #include "Matrix.h"
 #include "Astar.h"
 #include "Searcher.h"
+#include "BestFirstSearch.h"
+#include "BFS.h"
+#include "DFS.h"
+#include "MyClientHandler.h"
+#include "MatrixSolver.h"
 
 int main() {
 
-    int a_matrix[10][10] = {0, 0, 6, 7, 8, 9, 10, 11, 12, 13,
+    int a_matrix[10][10] = {0, 1, 6, 7, 8, 9, 10, 11, 12, 13,
                             14, 0, 0, 7, 3, 4, 12, 0, 0, 0,
                             6, -1, 0, 0, 0, 0, 0, 0, 5, 0,
                             -1, 5, 2, 3, 0, 0, 6, 7, 8, 0,
@@ -22,10 +26,18 @@ int main() {
                             3, 1, 2, 12, 5, 3, 0, 0, 0, 6,
                             3, 1, 2, -1, 5, 4, 3, 23, 0, 0};
 
-    Searcher<pair<int,int>> *my_Matrix = new Matrix(make_pair(0, 0), make_pair(9, 9), 10);
+    Matrix *my_Matrix = new Matrix(make_pair(0, 0), make_pair(9, 9), 10);
     my_Matrix->setMat(a_matrix);
-    Searcher<string>* searcher;
-    string solution = seracher->search(my_Matrix);
-    CacheManager<string>* cache_manager = new CacheManager<string>(1000);
-    cache_manager->insert(my_Matrix->toString() + "_" +  searcher->getClassName(), solution);
+//    Searcher<string, pair<int,int>>* searcher = new Astar();
+//    string solution = searcher->search(my_Matrix);
+//    cout<<solution<<endl;
+//  hash<string> str_hash;
+//  my_Matrix->setHashNum(str_hash());
+    Solver<string,string>* mySolver = new MatrixSolver();
+    mySolver->setSearcher(new Astar());
+    abstractServer *server = new MySerialServer(5600, new MyClientHandler(mySolver));
+    server->open(5600);
+//    CacheManager<string>* cache_manager = new CacheManager<string>(1000);
+//    cache_manager->insert(my_Matrix->toString() + "_" +  searcher->getClassName(), solution);
+
 }

@@ -13,17 +13,18 @@
 #include <unordered_map>
 #include <algorithm>
 #include "Searcher.h"
+#include "Searchable.h"
 
 typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
-class BestFirstSearch : public Searcher<string> {
+class BestFirstSearch : public Searcher<string,pair<int,int>> {
 public:
     std::string getClassName() {
         return "BestFirstSearch";
     }
 
-    std::string search(Matrix *a_matrix);
+    std::string search(Searchable<pair<int,int>> *s);
 
     std::string backtrace(point);
 
@@ -54,7 +55,7 @@ private:
     std::multiset<pathAndPoint> closed;
     point initialState;
     point goalState;
-    Matrix *matrix;
+    Searchable<pair<int,int>> *matrix;
 
 
 };

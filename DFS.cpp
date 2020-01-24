@@ -4,7 +4,7 @@
 
 #include "DFS.h"
 
-std::string DFS::search(Matrix *a_matrix) {
+std::string DFS::search(Searchable<pair<int,int>> *a_matrix) {
     this->matrix=a_matrix;
     this->initialState = a_matrix->getInitialState();
     this->goalState = a_matrix->getGoal();
@@ -50,10 +50,22 @@ std::string DFS::search(Matrix *a_matrix) {
 }
 
 std::string DFS::backtrace(point a_point) {
-    string point_str = to_string(a_point.first) + "," + to_string(a_point.second) + " ; ";
-    if (a_point.first == this->initialState.first && a_point.second == this->initialState.second) {
-        return point_str;
-    } else {
-        return backtrace(this->parent_map[a_point]) + point_str;
+  string point_str;
+  pair<int,int> parent = this->parent_map[a_point];
+  if (parent.first > a_point.first) {
+    point_str = "Up, ";
+  } else if (parent.first < a_point.first) {
+    point_str = "Down, ";
+  } else if (parent.second > a_point.second) {
+    point_str = "Left, ";
+  } else {
+    point_str = "Right, ";
+  }
+
+  if (a_point.first==this->initialState.first&&a_point.second==this->initialState.second) {
+    return "";
+  }
+  else {
+    return backtrace(this->parent_map[a_point]) + point_str;
     }
 }

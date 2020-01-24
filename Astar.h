@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class Astar : public Searcher<string> {
+class Astar : public Searcher<string, pair<int,int>> {
   struct cell_det {
     cell_det() : g(INT_MAX), f(INT_MAX), h(INT_MAX), visited(false), closed(false) {}
     int g, h, f;
@@ -37,7 +37,7 @@ class Astar : public Searcher<string> {
     string getClassName(){
         return "Astar";
     }
-  string search(Matrix* matrix);
+    string search(Searchable<pair<int,int>>* s);
 };
 
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__ASTAR_H_

@@ -9,19 +9,23 @@
 #include "Matrix.h"
 #include "Searchable.h"
 #include "MatrixAdapter.h"
-#include "Searcher.h"
 
 class MatrixSolver : public Solver<std::string, std::string> {
 private:
     Matrix *matrix;
     MatrixAdapter *adapter;
-    Searcher<std::string> *searcher;
+    Searcher<std::string,pair<int,int>> *searcher;
 public:
+    MatrixSolver() {
+      this->adapter = new MatrixAdapter();
+    }
     std::string solve(std::string problem);
 
-    void setSearcher(Searcher<std::string> *a_searcher) {
+    void setSearcher(Searcher<std::string,pair<int,int>> *a_searcher) {
         this->searcher = a_searcher;
     }
+
+    void setProblem(string problem);
 
     string getSearcherClassName();
 };

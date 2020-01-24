@@ -19,12 +19,12 @@ typedef std::pair<int, int> point;
 typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 
-class DFS : public Searcher<string> {
+class DFS : public Searcher<string, pair<int,int>> {
 public:
     std::string getClassName(){
         return "DFS";
     }
-    std::string search(Matrix *a_matrix);
+    std::string search(Searchable<pair<int,int>> *s);
     std::string backtrace(point);
     std::list<point> successors(point a_point) {
         std::list<point> successors;
@@ -41,7 +41,7 @@ public:
     }
 
 private:
-    Matrix *matrix;
+    Searchable<pair<int,int>> *matrix;
     unordered_map<pair<int, int>, pair<int, int>, pair_hash> parent_map;
     std::deque<pathAndPoint> open;
     std::multiset<pathAndPoint> closed;

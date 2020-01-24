@@ -20,14 +20,14 @@ bool Matrix::isGoalState(pair<int, int> state) {
 
 list<pair<int, int>> Matrix::getAllPossibleStates(pair<int, int> state) {
   list<pair<int,int>> states;
-  pair<int,int> temp, down, left, right, up_right, up_left, down_right, down_left;
-  //up
-  temp = make_pair(state.first - 1, state.second);
+  pair<int,int> temp;
+  //down
+  temp = make_pair(state.first + 1, state.second);
   if (isPointValid(temp) && !isBlocked(temp)) {
     states.push_back(temp);
   }
-  //down
-  temp = make_pair(state.first + 1, state.second);
+  //up
+  temp = make_pair(state.first - 1, state.second);
   if (isPointValid(temp) && !isBlocked(temp)) {
     states.push_back(temp);
   }
