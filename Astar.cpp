@@ -11,7 +11,7 @@ string Astar::search(Searchable<pair<int,int>>* matrix) {
   this->start = matrix->getInitialState();
   //initializing score array for the matrix, values are set to INT_MAX
   int n = matrix->getSize();
-  cell_det** score_mat = new cell_det*[n];
+  this->score_mat = new cell_det*[n];
   for(int i = 0; i < n; ++i) {
     score_mat[i] = new cell_det[n];
   }
@@ -25,7 +25,7 @@ string Astar::search(Searchable<pair<int,int>>* matrix) {
   //inserting start into queue
   auto start_pair = this->start;
   cell_det* start_cell = &score_mat[start_pair.first][start_pair.second];
-  start_cell->g = 0;
+  start_cell->g = matrix->getValueOfPoint(start_pair);
   start_cell->f = start_cell->h;
   open.push(make_pair(start_pair, start_cell));
 
@@ -76,14 +76,15 @@ int Astar::h_distance(pair<int, int> point) {
 string Astar::reconstructPath(pair<int,int> point) {
   string point_str;
   pair<int,int> parent = this->parent_map[point];
+  string cost = to_string(this->score_mat[point.first][point.second].g);
   if (parent.first > point.first) {
-    point_str = "Up, ";
+    point_str = "Up(" + cost + "),";
   } else if (parent.first < point.first) {
-    point_str = "Down, ";
+    point_str = "Down(" + cost + "),";
   } else if (parent.second > point.second) {
-    point_str = "Left, ";
+    point_str = "Left(" + cost + "),";
   } else {
-    point_str = "Right, ";
+    point_str = "Right(" + cost + "),";
   }
 
   if (point == this->start) {
