@@ -21,6 +21,10 @@ typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 class DFS : public Searcher<string, pair<int,int>> {
 public:
+    DFS* clone(){
+        DFS *cloned = new DFS();
+        return cloned;
+    }
     std::string getClassName(){
         return "DFS";
     }

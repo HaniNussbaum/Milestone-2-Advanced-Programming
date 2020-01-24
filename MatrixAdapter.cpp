@@ -10,7 +10,7 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
   string line;
   //breaking string into lines
   while (getline(str_stream, line, '\n')) {
-    line = line.substr(0, line.length() - 1);
+//    line = line.substr(0, line.length() - 1);
     lines.push_back(line);
     line.clear();
   }

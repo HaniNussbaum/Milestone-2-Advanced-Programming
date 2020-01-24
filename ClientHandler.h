@@ -8,5 +8,6 @@
 class ClientHandler {
  public:
   virtual int handleClient(int socket) = 0;
+  virtual ClientHandler* clone()=0;
 };
 #endif //MILESTONE_2_ADVANCED_PROGRAMMING__CLIENTHANDLER_H_

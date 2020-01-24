@@ -20,6 +20,10 @@ typedef std::pair<point, std::pair<int, point>> pathAndPoint;
 
 class BFS : public Searcher<string,pair<int,int>> {
 public:
+    BFS* clone(){
+        BFS *cloned = new BFS();
+        return cloned;
+    }
     std::string search(Searchable<pair<int,int>> *a_matrix);
     std::string getClassName(){
         return "BFS";

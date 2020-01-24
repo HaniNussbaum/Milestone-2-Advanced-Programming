@@ -28,6 +28,10 @@ class Astar : public Searcher<string, pair<int,int>> {
       return c1.second->f > c2.second->f;
     }
   };
+    Astar* clone(){
+        Astar *cloned = new Astar();
+        return cloned;
+    }
   unordered_map<pair<int,int>, pair<int,int>, pair_hash> parent_map;
   pair<int,int> goal;
   pair<int,int> start;
