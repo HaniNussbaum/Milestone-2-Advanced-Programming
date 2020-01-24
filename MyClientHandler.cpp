@@ -21,7 +21,7 @@ int MyClientHandler::handleClient(int socket) {
     i++;
   }
   cout<<to_string(i)<<endl;
-  string problem = problem_buffer.substr(0, problem_buffer.length() - 5);
+  string problem = problem_buffer.substr(0, problem_buffer.length() - 4);
   this->solver->setProblem(problem);
   hash<string> str_hash;
   string prob_hash = to_string(str_hash(problem));
