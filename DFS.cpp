@@ -41,7 +41,8 @@ std::string DFS::search(Searchable<pair<int,int>> *a_matrix) {
                                            });
             if (closedFind_neighbor==closed.end()){
                 parent_map[p_path_and_point.first]=s.first;
-                    open.push_front(p_path_and_point);
+                parent_map_track[p_path_and_point.first]=p_path_and_point.second.first;
+                open.push_front(p_path_and_point);
             }
         }
 
@@ -50,22 +51,26 @@ std::string DFS::search(Searchable<pair<int,int>> *a_matrix) {
 }
 
 std::string DFS::backtrace(point a_point) {
-  string point_str;
-  pair<int,int> parent = this->parent_map[a_point];
-  if (parent.first > a_point.first) {
-    point_str = "Up, ";
-  } else if (parent.first < a_point.first) {
-    point_str = "Down, ";
-  } else if (parent.second > a_point.second) {
-    point_str = "Left, ";
-  } else {
-    point_str = "Right, ";
-  }
+    string point_str;
+    pair<int,int> parent = this->parent_map[a_point];
+    if (parent.first > a_point.first) {
+//        point_str = "Up";
+        point_str = "Up("+to_string(parent_map_track[a_point])+"), ";
+    } else if (parent.first < a_point.first) {
+//        point_str = "Down";
+        point_str = "Down("+to_string(parent_map_track[a_point])+"), ";
+    } else if (parent.second > a_point.second) {
+//        point_str = "Left";
+        point_str = "Left("+to_string(parent_map_track[a_point])+"), ";
+    } else {
+//        point_str="Right";
+        point_str = "Right("+to_string(parent_map_track[a_point])+"), ";
+    }
 
-  if (a_point.first==this->initialState.first&&a_point.second==this->initialState.second) {
-    return "";
-  }
-  else {
-    return backtrace(this->parent_map[a_point]) + point_str;
+    if (a_point.first==this->initialState.first&&a_point.second==this->initialState.second) {
+        return "";
+    }
+    else {
+        return backtrace(this->parent_map[a_point]) + point_str;
     }
 }

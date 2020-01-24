@@ -6,7 +6,7 @@
 
 int MyClientHandler::handleClient(int socket) {
   string line, solution, problem_buffer = "";
-  char message[1024] = {0};
+  char message[10000] = {0};
   int i = 1;
   while (true) {
     char buffer[1024] = {0};

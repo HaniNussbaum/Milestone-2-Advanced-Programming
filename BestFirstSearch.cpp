@@ -20,8 +20,9 @@ std::string BestFirstSearch::search(Searchable<pair<int,int>>* a_matrix) {
     this->matrix = a_matrix;
     this->initialState = a_matrix->getInitialState();
     this->goalState = a_matrix->getGoal();
-    pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
+    pathAndPoint initialStatePoint = make_pair(initialState, make_pair(matrix->getValueOfPoint(initialState), initialState));
     this->open.insert(initialStatePoint);
+    parent_map_track[initialState]=matrix->getValueOfPoint(initialState);
     while (!open.empty()) {
         pathAndPoint n = make_pair(open.begin()->first, open.begin()->second);
         closed.insert(n);
@@ -41,11 +42,13 @@ std::string BestFirstSearch::search(Searchable<pair<int,int>>* a_matrix) {
                 if (itOpen == open.end() && itClosed == closed.end()) {
                     open.insert(p_path_and_point);
                     parent_map[p] = n.first;
+                    parent_map_track[p]=p_path_and_point.second.first;
                 } else {
                     if (itClosed->second.first > p_path_and_point.second.first) {
                         if (itOpen == open.end()) {
                             open.insert(p_path_and_point);
                             parent_map[p] = n.first;
+                            parent_map_track[p]=p_path_and_point.second.first;
                         } else {
                             auto openFind = std::find_if(open.begin(), open.end(),
                                                          [pointFirst, pointSecond](const pathAndPoint &pap) {
@@ -56,6 +59,7 @@ std::string BestFirstSearch::search(Searchable<pair<int,int>>* a_matrix) {
                                 open.erase(openFind);
                                 open.insert(p_path_and_point);
                                 parent_map[p] = n.first;
+                                parent_map_track[p]=p_path_and_point.second.first;
                             }
                         }
                     }
@@ -69,13 +73,13 @@ std::string BestFirstSearch::backtrace(point a_point) {
   string point_str;
   pair<int,int> parent = this->parent_map[a_point];
   if (parent.first > a_point.first) {
-    point_str = "Up, ";
+    point_str = "Up("+to_string(parent_map_track[a_point])+"), ";
   } else if (parent.first < a_point.first) {
-    point_str = "Down, ";
+    point_str = "Down("+to_string(parent_map_track[a_point])+"), ";
   } else if (parent.second > a_point.second) {
-    point_str = "Left, ";
+    point_str = "Left("+to_string(parent_map_track[a_point])+"), ";
   } else {
-    point_str = "Right, ";
+    point_str = "Right("+to_string(parent_map_track[a_point])+"), ";
   }
 
   if (a_point.first==this->initialState.first&&a_point.second==this->initialState.second) {

@@ -44,6 +44,7 @@ public:
 private:
     Searchable<pair<int,int>> *matrix;
     unordered_map<pair<int, int>, pair<int, int>, pair_hash> parent_map;
+    unordered_map<pair<int,int>,int,pair_hash> parent_map_track;
     std::list<pathAndPoint> open;
     std::multiset<pathAndPoint> closed;
     point initialState;
