@@ -29,8 +29,8 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
     regex pattern("[0-9-]+");
     auto words_begin = sregex_iterator(row.begin(), row.end(), pattern);
     auto words_end = sregex_iterator();
+    k = 0;
     for (sregex_iterator i = words_begin; i != words_end; ++i) {
-      k = 0;
       smatch match = *i;
       int value = stoi(match.str());
       if (value == -1) {

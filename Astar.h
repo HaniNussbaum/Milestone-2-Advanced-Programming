@@ -33,6 +33,7 @@ class Astar : public Searcher<string, pair<int,int>> {
   pair<int,int> start;
   int h_distance(pair<int,int> point);
   string reconstructPath(pair<int,int> point);
+  cell_det** score_mat;
  public:
     string getClassName(){
         return "Astar";
