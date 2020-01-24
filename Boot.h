@@ -27,7 +27,7 @@ class boot::Main {
   ~Main() {};
   int main(int argc, char** argv) {
     Solver<string,string>* mySolver = new MatrixSolver();
-    mySolver->setSearcher(new DFS());
+    mySolver->setSearcher(new Astar());
     if (argc == 1) {
       abstractServer *server = new MyParallelServer(5600, new MyClientHandler(mySolver));
       server->open(5600);

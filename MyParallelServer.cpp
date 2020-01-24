@@ -37,7 +37,7 @@ void MyParallelServer::open(int a_port) {
 void MyParallelServer::acceptClients(int clientSocket) {
     while (listen(clientSocket, 1024) != -1) {
         struct timeval tv;
-        tv.tv_sec = 20;
+        tv.tv_sec = 120;
         setsockopt(clientSocket, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
         int client_socket = accept(clientSocket, (struct sockaddr *) &this->address_num,
                                    (socklen_t *) &this->address_num);
