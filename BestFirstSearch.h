@@ -51,6 +51,7 @@ private:
     };
 
     unordered_map<pair<int, int>, pair<int, int>, pair_hash> parent_map;
+    unordered_map<pair<int,int>,int,pair_hash> parent_map_track;
     std::multiset<pathAndPoint, compare> open;
     std::multiset<pathAndPoint> closed;
     point initialState;

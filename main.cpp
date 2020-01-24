@@ -34,7 +34,7 @@ int main() {
 //  hash<string> str_hash;
 //  my_Matrix->setHashNum(str_hash());
     Solver<string,string>* mySolver = new MatrixSolver();
-    mySolver->setSearcher(new Astar());
+    mySolver->setSearcher(new DFS());
     abstractServer *server = new MySerialServer(5600, new MyClientHandler(mySolver));
     server->open(5600);
 //    CacheManager<string>* cache_manager = new CacheManager<string>(1000);

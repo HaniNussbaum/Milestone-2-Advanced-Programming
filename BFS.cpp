@@ -28,6 +28,7 @@ std::string BFS::search(Searchable<pair<int,int>> *a_matrix) {
             pathAndPoint p_path_and_point = make_pair(p,
                                                       make_pair(s.second.first + matrix->getValueOfPoint(p),
                                                                 s.first));
+            parent_map_track[p_path_and_point.first]=p_path_and_point.second.first;
             auto closedFind = std::find_if(closed.begin(), closed.end(),
                                            [pointFirst, pointSecond](const pathAndPoint &pap) {
                                                return (pap.first.first == pointFirst &&
@@ -45,22 +46,22 @@ std::string BFS::search(Searchable<pair<int,int>> *a_matrix) {
 }
 
 std::string BFS::backtrace(point a_point) {
-  string point_str;
-  pair<int,int> parent = this->parent_map[a_point];
-  if (parent.first > a_point.first) {
-    point_str = "Up, ";
-  } else if (parent.first < a_point.first) {
-    point_str = "Down, ";
-  } else if (parent.second > a_point.second) {
-    point_str = "Left, ";
-  } else {
-    point_str = "Right, ";
-  }
+    string point_str;
+    pair<int,int> parent = this->parent_map[a_point];
+    if (parent.first > a_point.first) {
+        point_str = "Up("+to_string(parent_map_track[a_point])+"), ";
+    } else if (parent.first < a_point.first) {
+        point_str = "Down("+to_string(parent_map_track[a_point])+"), ";
+    } else if (parent.second > a_point.second) {
+        point_str = "Left("+to_string(parent_map_track[a_point])+"), ";
+    } else {
+        point_str = "Right("+to_string(parent_map_track[a_point])+"), ";
+    }
 
-  if (a_point.first==this->initialState.first&&a_point.second==this->initialState.second) {
-    return "";
-  }
-  else {
-    return backtrace(this->parent_map[a_point]) + point_str;
+    if (a_point.first==this->initialState.first&&a_point.second==this->initialState.second) {
+        return "";
+    }
+    else {
+        return backtrace(this->parent_map[a_point]) + point_str;
     }
 }
