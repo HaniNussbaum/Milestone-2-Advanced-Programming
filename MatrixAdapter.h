@@ -9,6 +9,8 @@
 #include <sstream>
 #include <regex>
 
+//This is the adapter class.
+//It receives a matrix in string form and creates a matrix class with the given string.
 using namespace std;
 
 class MatrixAdapter {

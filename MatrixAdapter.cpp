@@ -10,9 +10,11 @@ Matrix* MatrixAdapter::adapt(string mat_str) {
   string line;
   //breaking string into lines
   while (getline(str_stream, line, '\n')) {
-//    line = line.substr(0, line.length() - 1);
-    lines.push_back(line);
-    line.clear();
+      if (line.find('\r') != string::npos) {
+        line = line.substr(0, line.length() - 1);
+      }
+      lines.push_back(line);
+      line.clear();
   }
   //last line is destination
   auto dst = this->getPoint(lines.back());

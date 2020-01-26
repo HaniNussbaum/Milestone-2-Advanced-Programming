@@ -10,6 +10,7 @@
 #include <unistd.h>
 
 void MyParallelServer::open(int a_port) {
+    //opens a regular server with the given port.
     this->port = a_port;
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     struct timeval tv;
@@ -35,7 +36,9 @@ void MyParallelServer::open(int a_port) {
 }
 
 void MyParallelServer::acceptClients(int clientSocket) {
+    //listens to up to 1024 clients in a vector.
     while (listen(clientSocket, 1024) != -1) {
+        //sets a timeout of 120 seconds for the socket.
         struct timeval tv;
         tv.tv_sec = 120;
         setsockopt(clientSocket, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
@@ -45,8 +48,9 @@ void MyParallelServer::acceptClients(int clientSocket) {
             break;
         }
         ClientHandler *currClientHandler = handler->clone();
-//need to close the client handler
-        std::thread clientThread(&ClientHandler::handleClient,currClientHandler, client_socket);
+        //each client has its own thread opened to it with a given personal socket.
+        //the thread is then detached.
+        std::thread clientThread(&ClientHandler::handleClient, currClientHandler, client_socket);
         clientThread.detach();
     }
 }

@@ -8,7 +8,7 @@
 #include <unordered_set>
 #include "Searchable.h"
 #include "PairHash.h"
-
+//This class is a searcahble represented by a matrix with all the given methods of the searchable abstract class.
 using namespace std;
 
 class Matrix : public Searchable<pair<int, int>> {

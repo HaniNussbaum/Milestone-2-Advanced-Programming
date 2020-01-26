@@ -7,6 +7,7 @@
 #include <list>
 using namespace std;
 template <typename  T>
+//This class represents a problem that is searchable, and all the methods need to be implemented by a searchable.
 class Searchable {
  public:
   virtual T getInitialState() = 0;
