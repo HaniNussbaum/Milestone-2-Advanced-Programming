@@ -28,14 +28,17 @@ int MyClientHandler::handleClient(int socket) {
   prob_hash += this->solver->getSearcherClassName();
 
   try {
-    solution = this->cache_manager->get(problem);
+    solution = this->cache_manager->get(prob_hash);
+
+    cout<<"solution found in cache"<<endl;
     //if no solution is found solve the problem_buffer
   } catch (char const *e) {
+    cout<<"solution wasn't fount in cache"<<endl;
     solution = this->solver->solve(problem);
     this->cache_manager->insert(prob_hash, solution);
-    solution = solution+"\r\n";
-    strcpy(message, solution.c_str());
-    int is_sent = send(socket, &message, strlen(message), 0);
   }
+  solution = solution+"\r\n";
+  strcpy(message, solution.c_str());
+  int is_sent = send(socket, &message, strlen(message), 0);
   close(socket);
 }

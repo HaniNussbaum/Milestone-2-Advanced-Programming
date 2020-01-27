@@ -12,6 +12,7 @@
 #include <list>
 #include <fstream>
 #include <functional>
+#include <iostream>
 
 using namespace std;
 
@@ -37,10 +38,6 @@ public:
 
 template<typename T>
 void CacheManager<T>::insert(string key, T obj) {
-//    if (keys.size() == 0) {
-//        class_name = obj.class_name;
-//    }
-
     //the key is not in the cache->write into the filesystem and into the cache
     if (map.find(key) == map.end()) {
         //cache is full->clear space to insert.
@@ -57,11 +54,12 @@ void CacheManager<T>::insert(string key, T obj) {
     }
     //write to a file.
     //INSERT CODE OF WRITING TO A FILE HERE
-    std::fstream out_file(key, std::ios::out);
+    std::fstream out_file(key + ".txt", std::ios::out);
     out_file<<obj<<endl;
     out_file.close();
     keys.push_front(key);
     map[key] = make_pair(obj, keys.begin());
+    cout<<"inserting " + key + ":" + obj<<endl;
 }
 
 template<typename T>
@@ -69,15 +67,20 @@ T CacheManager<T>::get(string key) {
     if (map.find(key) == map.end()) {
         //^can't find the key in the cache, try on the disk
         std::fstream in_file;
-        in_file.open(key, std::ios::in | std::ios::binary);
+        in_file.open(key + ".txt", std::ios::in | std::ios::out);
+        cout<<key<<endl;
         if (!in_file) {
             throw "error in opening file to read";
         }
         //got the object from the harddisk, now insert it
         T obj;
-        if (in_file.is_open()) {
-            in_file.read((char *) &obj, sizeof(obj));
-            in_file.close();
+//        if (in_file.is_open()) {
+//            in_file.read((char *) &obj, sizeof(obj));
+//            in_file.close();
+//        }
+        string line, solution = "";
+        while (std::getline(in_file, line)) {
+          solution += line;
         }
         //delete the LRU if the cache is full
         if (keys.size() == cacheSize) {
@@ -89,9 +92,10 @@ T CacheManager<T>::get(string key) {
         }
         //insert the object to MRU
         keys.push_front(key);
-        map[key] = make_pair(obj, keys.begin());
-        return obj;
+        map[key] = make_pair(solution, keys.begin());
+        return solution;
     } else {
+        cout<<"found in map"<<endl;
         T obj = map[key].first;
         keys.erase(map[key].second);
         keys.push_front(key);
