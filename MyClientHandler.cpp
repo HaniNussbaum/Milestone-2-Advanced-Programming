@@ -30,7 +30,10 @@ int MyClientHandler::handleClient(int socket) {
     prob_hash += "_";
     prob_hash += this->solver->getSearcherClassName();
     try {
-        solution = this->cache_manager->get(problem);
+        solution = this->cache_manager->get(prob_hash);
+        cout<<"found in cache"<<endl;
+      solution = solution + "\r\n";
+      strcpy(message, solution.c_str());
         //if no solution is found solve the problem_buffer
     } catch (char const *e) {
         solution = this->solver->solve(problem);
@@ -43,7 +46,7 @@ int MyClientHandler::handleClient(int socket) {
             strcpy(message, solution.c_str());
         }
         //sends the message
-        int is_sent = send(socket, &message, strlen(message), 0);
     }
-    close(socket);
+  int is_sent = send(socket, &message, strlen(message), 0);
+  close(socket);
 }
