@@ -7,6 +7,7 @@
 #include "Searchable.h"
 
 template <typename T, typename P>
+//this class represents a searcher that can solve a searching algorithm, like path searching algorithms.
 class Searcher {
  public:
   virtual T search(Searchable<P>* s) = 0;

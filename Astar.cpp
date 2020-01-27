@@ -67,6 +67,7 @@ string Astar::search(Searchable<pair<int,int>>* matrix) {
       }
     }
   }
+    return "";
 }
 
 int Astar::h_distance(pair<int, int> point) {

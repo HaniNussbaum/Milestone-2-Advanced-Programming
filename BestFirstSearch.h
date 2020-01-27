@@ -30,7 +30,7 @@ public:
     std::string search(Searchable<pair<int,int>> *s);
 
     std::string backtrace(point);
-
+    //checks the results of AllPossibleStates and returns a list of neighbors that haven't been processed yet.
     std::list<point> successors(point a_point) {
         std::list<point> successors;
         std::list<point> neighbors = matrix->getAllPossibleStates(a_point);
@@ -47,6 +47,7 @@ public:
 
 
 private:
+    //custom comparator that compares the path by the cost of it.
     struct compare {
         bool operator()(const pathAndPoint first_point, const pathAndPoint second_point) const {
             return first_point.second.first < second_point.second.first;

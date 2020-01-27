@@ -10,6 +10,7 @@ std::string DFS::search(Searchable<pair<int,int>> *a_matrix) {
     this->goalState = a_matrix->getGoal();
     pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
     open.push_front(initialStatePoint);
+    //the start of the algorithm after adding the initialState node to the queue.
     while (!open.empty()){
         pathAndPoint s = open.front();
         open.pop_front();
@@ -26,6 +27,7 @@ std::string DFS::search(Searchable<pair<int,int>> *a_matrix) {
         if (closedFind!=closed.end()){
             continue;
         }
+        //marks the node as visited by adding it to closed.
         closed.insert(s);
         list<point> neighbors = successors(s.first);
         for (auto currPoint = neighbors.rbegin();currPoint!=neighbors.rend();++currPoint){
@@ -47,23 +49,20 @@ std::string DFS::search(Searchable<pair<int,int>> *a_matrix) {
         }
 
     }
-//    return backtrace(goalState);
+    return "";
 }
 
 std::string DFS::backtrace(point a_point) {
+    //Returns a string of the path by tracing the goal node back to the original.
     string point_str;
     pair<int,int> parent = this->parent_map[a_point];
     if (parent.first > a_point.first) {
-//        point_str = "Up";
         point_str = "Up("+to_string(parent_map_track[a_point])+"), ";
     } else if (parent.first < a_point.first) {
-//        point_str = "Down";
         point_str = "Down("+to_string(parent_map_track[a_point])+"), ";
     } else if (parent.second > a_point.second) {
-//        point_str = "Left";
         point_str = "Left("+to_string(parent_map_track[a_point])+"), ";
     } else {
-//        point_str="Right";
         point_str = "Right("+to_string(parent_map_track[a_point])+"), ";
     }
 

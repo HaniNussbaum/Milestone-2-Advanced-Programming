@@ -12,6 +12,7 @@ std::string BFS::search(Searchable<pair<int, int>> *a_matrix) {
     pathAndPoint initialStatePoint = make_pair(initialState, make_pair(0, initialState));
     this->open.push_back(initialStatePoint);
     this->closed.insert(initialStatePoint);
+    //the start of the algorithm, after the initalState node was foudn.
     while (!open.empty()) {
         pathAndPoint s = open.front();
         open.pop_front();
@@ -19,7 +20,7 @@ std::string BFS::search(Searchable<pair<int, int>> *a_matrix) {
             return backtrace(s.first);
         }
         std::list<point> neighbors = successors(s.first);
-
+        //processes the neighbors
         for (point p : neighbors) {
             parent_map[p] = s.first;
             int pointFirst = p.first;
@@ -35,17 +36,18 @@ std::string BFS::search(Searchable<pair<int, int>> *a_matrix) {
                                                        pap.first.second == pointSecond);
                                            });
             if (closedFind == closed.end()) {
-
+                //marks the node as visited by adding it to closed.
                 closed.insert(p_path_and_point);
                 open.push_back(p_path_and_point);
             }
 
         }
     }
-//    return backtrace(this->goalState);
+    return "";
 }
 
 std::string BFS::backtrace(point a_point) {
+    //Returns a string of the path by tracing the goal node back to the original.
     string point_str;
     pair<int, int> parent = this->parent_map[a_point];
     if (parent.first > a_point.first) {
